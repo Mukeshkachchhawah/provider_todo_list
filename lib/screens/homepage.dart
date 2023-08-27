@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provide_database_example/provider/database_provider.dart';
+import 'package:provide_database_example/screens/taksadd.dart';
+import 'package:provide_database_example/screens/update.dart';
 import 'package:provider/provider.dart';
 
 class HomaPage extends StatefulWidget {
@@ -26,32 +28,48 @@ class _HomaPageState extends State<HomaPage> {
         title: Text("Provider or DataBase"),
       ),
       body: Consumer<DataBase_Provider>(
-        builder: (context, provider, child) {
+        //ctx = contex
+        builder: (ctx, provider, child) {
           notes = provider.arrDataList;
           return ListView.builder(
             itemCount: notes.length,
             itemBuilder: (context, index) {
+              var currNote = notes[index];
               return InkWell(
-                onTap: () {
-                  
-                },
-                child: ListTile(
-                  leading: Text("${index+1}"),
-                  title: Text("${notes[index]['title']}"),
-                  subtitle: Text("${notes[index]['desc']}"),
-                  trailing: InkWell(
-                    onTap: () {
-                      
-                    },
-                    child: Icon(Icons.delete)),
-                ));
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Update(
+                            id: currNote['note_id'],
+                            desc: currNote['title'],
+                            name: currNote['desc'],
+                          ),
+                        ));
+                  },
+                  child: ListTile(
+                    leading: Text("${index + 1}"),
+                    title: Text("${currNote['title']}"),
+                    subtitle: Text("${currNote['desc']}"),
+                    trailing: InkWell(
+                        onTap: () async {
+                          await provider.deletData(currNote["note_id"]);
+                        },
+                        child: Icon(Icons.delete)),
+                  ));
             },
           );
         },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          context.read<DataBase_Provider>().addData("Flutter", "Hkgjdg");
+          // Provider.of<DataBase_Provider>(context, listen: false)
+          //     .addData("Flutter", "Hkgjdg");
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => AddTaks(),
+              ));
         },
         child: Icon(Icons.add),
       ),

@@ -14,7 +14,7 @@ class MyDBHelper {
 
     return await openDatabase(dbpath, version: 1, onCreate: (db, version) {
       var createTableQuery =
-          "create table $NOTE_TABLE($COLUM_NOTE_ID integer primary key autoincrement, $COLUM_NOTE_TITLE text, $COLUM_NOTE_DESC text)";
+          "create table $NOTE_TABLE ($COLUM_NOTE_ID integer primary key autoincrement, $COLUM_NOTE_TITLE text, $COLUM_NOTE_DESC text)";
       db.execute(createTableQuery);
     });
   }
@@ -41,7 +41,9 @@ class MyDBHelper {
     return chack > 0;
   }
 
-  Future<bool> deletNotes(String id) async {
+  
+
+  Future<bool> deletNotes(int id) async {
     var db = await openDB();
     var check = await db
         .delete(NOTE_TABLE, where: "$COLUM_NOTE_ID = ?", whereArgs: ["$id"]);

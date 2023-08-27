@@ -8,6 +8,8 @@ class DataBase_Provider extends ChangeNotifier {
   Future<void> addData(String title, String desc) async {
     bool chack = await MyDBHelper().addNote(title, desc);
     if (chack) {
+      /// conditon is true
+      ///  add data
       arrDataList = await MyDBHelper().fetchAllNotes();
       notifyListeners();
     } else {
@@ -15,7 +17,24 @@ class DataBase_Provider extends ChangeNotifier {
     }
   }
 
-  void deletData(int index){   
+  Future<void> deletData(int id) async {
+    var check = await MyDBHelper().deletNotes(id);
+    if (check) {
+      arrDataList = await MyDBHelper().fetchAllNotes();
+      notifyListeners();
+    } else {
+      print("Remove data");
+    }
+  }
+
+  Future<void> updateData(int id, String title, String desc) async {
+    var check = await MyDBHelper().updateNotes(id, title, desc);
+    if (check) {
+      arrDataList = await MyDBHelper().fetchAllNotes();
+      notifyListeners();
+    } else {
+      print("Update Data");
+    }
   }
 
   Future<void> getInitialData() async {
