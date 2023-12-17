@@ -49,28 +49,29 @@ class _UpdateState extends State<Update> {
                 },
                 decoration: InputDecoration(
                     hintText: "Title",
+                    labelText: "Title",
                     hintStyle: TextStyle(
-                      fontSize: 25,
                       fontWeight: FontWeight.bold,
                     ),
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20))),
+                        borderRadius: BorderRadius.circular(10))),
               ),
               SizedBox(
                 height: 20,
               ),
               TextFormField(
                 controller: descController,
-                maxLines: 10,
+                maxLines: null,
                 decoration: InputDecoration(
                     hintText: "Desc..",
+                    labelText: "Description",
                     hintStyle: TextStyle(
                       //  fontSize: 34,
 
                       fontWeight: FontWeight.bold,
                     ),
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20))),
+                        borderRadius: BorderRadius.circular(10))),
                 validator: (value) {
                   if (value == " ") {
                     return "Enter Your desc";

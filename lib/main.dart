@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provide_database_example/provider/database_provider.dart';
-import 'package:provide_database_example/screens/homepage.dart';
 import 'package:provider/provider.dart';
+
+import 'screens/splash_screens.dart';
 
 void main() {
   runApp(ChangeNotifierProvider(
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomaPage(),
+      home: SplashScreens(),
     );
   }
 }
