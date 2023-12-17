@@ -4,7 +4,10 @@ import 'package:provide_database_example/screens/homepage.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp( ChangeNotifierProvider(create: (context) => DataBase_Provider(),child: MyApp(),));
+  runApp(ChangeNotifierProvider(
+    create: (context) => UserDataProvider(),
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -14,13 +17,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Provider Todo List',
       theme: ThemeData(
-      
         primarySwatch: Colors.blue,
       ),
       home: HomaPage(),
     );
   }
 }
-

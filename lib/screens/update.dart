@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provide_database_example/provider/database_provider.dart';
 import 'package:provider/provider.dart';
 
+/// globle varible
 var ID;
 var NAME;
 var DECSE;
@@ -30,7 +31,7 @@ class _UpdateState extends State<Update> {
     descController.text = DECSE;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Update"),
+        title: Text("Update Todo"),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 100, horizontal: 20),
@@ -62,7 +63,7 @@ class _UpdateState extends State<Update> {
                 controller: descController,
                 maxLines: 10,
                 decoration: InputDecoration(
-                    hintText: "Title",
+                    hintText: "Desc..",
                     hintStyle: TextStyle(
                       //  fontSize: 34,
 
@@ -83,7 +84,7 @@ class _UpdateState extends State<Update> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          await Provider.of<DataBase_Provider>(context, listen: false)
+          await Provider.of<UserDataProvider>(context, listen: false)
               .updateData(ID, titieController.text, descController.text);
           setState(() {});
           //if (formKey.currentState!.validate()) Navigator.pop(context);

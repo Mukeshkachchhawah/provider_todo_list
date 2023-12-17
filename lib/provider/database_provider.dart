@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provide_database_example/database/mydb_helper.dart';
 
-class DataBase_Provider extends ChangeNotifier {
+class UserDataProvider extends ChangeNotifier {
   List<Map<String, dynamic>> arrDataList = [];
 
   /// function add data
@@ -17,6 +17,7 @@ class DataBase_Provider extends ChangeNotifier {
     }
   }
 
+  /// function delet data
   Future<void> deletData(int id) async {
     var check = await MyDBHelper().deletNotes(id);
     if (check) {
@@ -27,6 +28,7 @@ class DataBase_Provider extends ChangeNotifier {
     }
   }
 
+  /// function update data
   Future<void> updateData(int id, String title, String desc) async {
     var check = await MyDBHelper().updateNotes(id, title, desc);
     if (check) {
@@ -37,6 +39,7 @@ class DataBase_Provider extends ChangeNotifier {
     }
   }
 
+  /// fucn InitialData
   Future<void> getInitialData() async {
     arrDataList = await MyDBHelper().fetchAllNotes();
     notifyListeners();

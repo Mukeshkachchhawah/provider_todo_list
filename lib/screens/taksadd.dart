@@ -10,7 +10,7 @@ class AddTaks extends StatefulWidget {
 }
 
 class _AddTaksState extends State<AddTaks> {
-    final formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
   TextEditingController titieController = TextEditingController();
   TextEditingController descController = TextEditingController();
   @override
@@ -19,10 +19,8 @@ class _AddTaksState extends State<AddTaks> {
       appBar: AppBar(
         title: Text("Add Taks"),
       ),
-
-   
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
         child: Form(
           key: formKey,
           child: Column(
@@ -30,7 +28,7 @@ class _AddTaksState extends State<AddTaks> {
               TextFormField(
                 controller: titieController,
                 validator: (value) {
-                  if (value == " ") {
+                  if (value!.isEmpty) {
                     return "Enter Your Titil";
                   }
                   return null;
@@ -38,29 +36,29 @@ class _AddTaksState extends State<AddTaks> {
                 decoration: InputDecoration(
                     hintText: "Title",
                     hintStyle: TextStyle(
-                      fontSize: 25,
+                      // fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20))),
+                        borderRadius: BorderRadius.circular(10))),
               ),
               SizedBox(
                 height: 20,
               ),
               TextFormField(
                 controller: descController,
-                maxLines: 10,
+                maxLines: null,
                 decoration: InputDecoration(
-                    hintText: "Title",
+                    hintText: "Desc.....",
                     hintStyle: TextStyle(
                       //  fontSize: 34,
 
                       fontWeight: FontWeight.bold,
                     ),
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20))),
+                        borderRadius: BorderRadius.circular(10))),
                 validator: (value) {
-                  if (value == " ") {
+                  if (value!.isEmpty) {
                     return "Enter Your desc";
                   }
                   return null;
@@ -72,7 +70,7 @@ class _AddTaksState extends State<AddTaks> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          await Provider.of<DataBase_Provider>(context, listen: false)
+          await Provider.of<UserDataProvider>(context, listen: false)
               .addData(titieController.text, descController.text);
           setState(() {});
           //if (formKey.currentState!.validate()) Navigator.pop(context);
@@ -80,7 +78,6 @@ class _AddTaksState extends State<AddTaks> {
         },
         child: Icon(Icons.save),
       ),
-   
     );
   }
 }

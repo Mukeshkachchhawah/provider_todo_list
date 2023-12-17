@@ -18,7 +18,7 @@ class _HomaPageState extends State<HomaPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    context.read<DataBase_Provider>().getInitialData();
+    context.read<UserDataProvider>().getInitialData();
   }
 
   @override
@@ -27,37 +27,39 @@ class _HomaPageState extends State<HomaPage> {
       appBar: AppBar(
         title: Text("Provider or DataBase"),
       ),
-      body: Consumer<DataBase_Provider>(
+      body: Consumer<UserDataProvider>(
         //ctx = contex
         builder: (ctx, provider, child) {
           notes = provider.arrDataList;
-          return ListView.builder(
-            itemCount: notes.length,
-            itemBuilder: (context, index) {
-              var currNote = notes[index];
-              return InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Update(
-                            id: currNote['note_id'],
-                            desc: currNote['title'],
-                            name: currNote['desc'],
-                          ),
-                        ));
-                  },
-                  child: ListTile(
-                    leading: Text("${index + 1}"),
-                    title: Text("${currNote['title']}"),
-                    subtitle: Text("${currNote['desc']}"),
-                    trailing: InkWell(
-                        onTap: () async {
-                          await provider.deletData(currNote["note_id"]);
-                        },
-                        child: Icon(Icons.delete)),
-                  ));
-            },
+          return Card(
+            child: ListView.builder(
+              itemCount: notes.length,
+              itemBuilder: (context, index) {
+                var currNote = notes[index];
+                return InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Update(
+                              id: currNote['note_id'],
+                              desc: currNote['title'],
+                              name: currNote['desc'],
+                            ),
+                          ));
+                    },
+                    child: ListTile(
+                      leading: Text("${index + 1}"),
+                      title: Text("${currNote['title']}"),
+                      subtitle: Text("${currNote['desc']}"),
+                      trailing: InkWell(
+                          onTap: () async {
+                            await provider.deletData(currNote["note_id"]);
+                          },
+                          child: Icon(Icons.delete)),
+                    ));
+              },
+            ),
           );
         },
       ),
