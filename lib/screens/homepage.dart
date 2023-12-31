@@ -43,8 +43,8 @@ class _HomaPageState extends State<HomaPage> {
                           MaterialPageRoute(
                             builder: (context) => Update(
                               id: currNote['note_id'],
-                              desc: currNote['title'],
-                              name: currNote['desc'],
+                              desc: currNote['desc'],
+                              name: currNote['title'],
                             ),
                           ));
                     },
